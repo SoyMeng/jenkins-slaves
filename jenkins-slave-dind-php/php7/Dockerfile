@@ -75,10 +75,10 @@ RUN set -xe \
 	&& make clean \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps
 
-RUN curl -o phpunit.phar https://phar.phpunit.de/phpunit-5.4.6.phar \
-  && chmod +x phpunit.phar \
-  && mv phpunit.phar /usr/local/bin/phpunit \
-  && phpunit --version
+#RUN curl -o phpunit.phar https://phar.phpunit.de/phpunit-5.4.6.phar \
+#  && chmod +x phpunit.phar \
+#  && mv phpunit.phar /usr/local/bin/phpunit \
+#  && phpunit --version
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && php -r "if (hash_file('SHA384', 'composer-setup.php') === 'bf16ac69bd8b807bc6e4499b28968ee87456e29a3894767b60c2d4dafa3d10d045ffef2aeb2e78827fa5f024fbe93ca2') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
