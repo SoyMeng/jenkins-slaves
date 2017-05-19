@@ -28,8 +28,8 @@ RUN mkdir -p $PHP_INI_DIR/conf.d
 
 ENV GPG_KEYS 1A4E8B7277C42E53DBA9C7B9BCAA30EA9C0D5763
 
-ENV PHP_VERSION 7.1.3
-ENV PHP_FILENAME php-7.1.3.tar.xz
+ENV PHP_VERSION 7.0.7
+ENV PHP_FILENAME php-7.0.7.tar.xz
 ENV PHP_SHA256 9cc64a7459242c79c10e79d74feaf5bae3541f604966ceb600c3d2e8f5fe4794
 
 RUN set -xe \
@@ -83,8 +83,8 @@ RUN curl -o phpunit.phar https://phar.phpunit.de/phpunit-5.4.6.phar \
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
   && php -r "if (hash_file('SHA384', 'composer-setup.php') === 'bf16ac69bd8b807bc6e4499b28968ee87456e29a3894767b60c2d4dafa3d10d045ffef2aeb2e78827fa5f024fbe93ca2') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
   && php composer-setup.php \
-  && php -r "unlink('composer-setup.php');"
-  && mv composer.phar /usr/local/bin/composer
+  && php -r "unlink('composer-setup.php');" \
+  && mv composer.phar /usr/local/bin/composer \
   && composer --version
 
 COPY docker-php-ext-* /usr/local/bin/
